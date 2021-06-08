@@ -1,8 +1,9 @@
 if !exists('g:ActiveWindow_enabled')
     let g:ActiveWindow_enabled = 1
 endif
-if !exists('g:ActiveWindow_number')
-    let g:ActiveWindow_number = 1
+if !exists('g:ActiveWindow_use_linenr')
+    let s:true = 1 "for vim version 704
+    let g:ActiveWindow_use_linenr = s:true
 endif
 if !exists('g:ActiveWindow_left_foldcolumn')
     let g:ActiveWindow_left_foldcolumn = 0
@@ -10,32 +11,15 @@ endif
 if !exists('g:ActiveWindow_right_foldcolumn')
     let g:ActiveWindow_right_foldcolumn = 1
 endif
-if !exists('g:ActiveWindow_StatusLineNC')
-    let g:ActiveWindow_StatusLineNC = 'cterm=underline ctermfg=8 ctermbg=black gui=none'
-endif
 
 if g:ActiveWindow_enabled
     augroup ActiveWindow
-        if !&number && g:ActiveWindow_number
+        if !&number && g:ActiveWindow_use_linenr
             autocmd VimEnter * set number
             autocmd WinEnter * set number
             autocmd BufEnter * set number
             autocmd WinLeave * set nonumber
             autocmd BufLeave * set nonumber
-        endif
-
-        "with default values
-        execute 'autocmd VimEnter,ColorScheme * highlight StatusLineNC '.g:ActiveWindow_StatusLineNC
-
-        "without default values
-        if exists('g:ActiveWindow_StatusLine')
-            execute 'autocmd VimEnter,ColorScheme * highlight StatusLine '.g:ActiveWindow_StatusLine
-        endif
-        if exists('g:ActiveWindow_LineNr')
-            execute 'autocmd VimEnter,ColorScheme * highlight LineNr '.g:ActiveWindow_LineNr
-        endif
-        if exists('g:ActiveWindow_FoldColumn')
-            execute 'autocmd VimEnter,ColorScheme * highlight FoldColumn '.g:ActiveWindow_FoldColumn
         endif
 
         autocmd VimEnter * if !&diff | call s:RedrawBorder() | endif
