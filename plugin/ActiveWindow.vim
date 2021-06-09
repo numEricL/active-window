@@ -14,7 +14,7 @@ endif
 
 if g:ActiveWindow_enabled
     augroup ActiveWindow
-        if !&number && g:ActiveWindow_use_linenr
+        if g:ActiveWindow_use_linenr
             autocmd VimEnter * set number
             autocmd WinEnter * set number
             autocmd BufEnter * set number
