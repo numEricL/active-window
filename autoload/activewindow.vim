@@ -17,10 +17,12 @@ endfunction
 function activewindow#set() abort
     for l:nr in range(1, winnr('$'))
         if l:nr == winnr()
-            call setwinvar(l:nr, '&number', 1)
+            call setwinvar(l:nr, '&number', &g:number)
+            call setwinvar(l:nr, '&relativenumber', &g:relativenumber)
             call setwinvar(l:nr, '&foldcolumn', 0)
         else
             call setwinvar(l:nr, '&number', 0)
+            call setwinvar(l:nr, '&relativenumber', 0)
 
             let l:n = s:Line(l:nr)
             let l:num_digits = 0
@@ -36,6 +38,7 @@ endfunction
 function activewindow#unset() abort
     for l:nr in range(1, winnr('$'))
         call setwinvar(l:nr, '&number', &g:number)
+        call setwinvar(l:nr, '&relativenumber', &g:number)
         call setwinvar(l:nr, '&foldcolumn', &g:foldcolumn)
     endfor
 endfunction
