@@ -1,6 +1,9 @@
 if !exists('g:ActiveWindow_enabled')
     let g:ActiveWindow_enabled = 1
 endif
+if !exists('g:ActiveWindow_cursorline')
+    let g:ActiveWindow_cursorline = 0
+endif
 nnoremap <silent> <plug>(activewindow-Toggle) :<c-u>call activewindow#Toggle()<cr>
 if !hasmapto('<plug>(activewindow-Toggle)')
     nmap <leader>- <plug>(activewindow-Toggle)
