@@ -6,7 +6,7 @@ original value.
 
 ## Cursor Line
 If you want the cursorline to be enabled for only the active window, set
-`g:ActiveWindow_cursorline = 1`
+`g:activewindow#cursorline = 1`
 
 ## Ignore Windows
 Use a list of regex patterns for buffers you don't want affected by
@@ -15,13 +15,13 @@ ActiveWindow.
 For example, use the following to ignore NERDTree windows and any buffer
 containing "foo" in its name:
 ```
-let g:ActiveWindow_skip = ['^NERD_tree_*', 'foo']
+let g:activewindow#skip = ['^NERD_tree_*', 'foo']
 ```
 
 ## Defaults
 ```
-g:ActiveWindow_enabled = 1
-g:ActiveWindow_cursorline = 0
+g:activewindow#enabled = 1
+g:activewindow#cursorline = 0
 nmap <leader>- <plug>(activewindow-Toggle)
 ```
 

@@ -1,6 +1,6 @@
 function activewindow#Toggle() abort
-    let g:ActiveWindow_enabled = !g:ActiveWindow_enabled
-    if g:ActiveWindow_enabled
+    let g:activewindow#enabled = !g:activewindow#enabled
+    if g:activewindow#enabled
         augroup ActiveWindow
             autocmd!
             autocmd WinEnter * call activewindow#set()
@@ -21,7 +21,7 @@ function activewindow#set() abort
             call setwinvar(l:nr, '&number', &g:number)
             call setwinvar(l:nr, '&relativenumber', &g:relativenumber)
             call setwinvar(l:nr, '&foldcolumn', &g:foldcolumn)
-            if g:ActiveWindow_cursorline
+            if g:activewindow#cursorline
                 call setwinvar(l:nr, '&cursorline', 1)
             endif
         else
@@ -32,7 +32,7 @@ function activewindow#set() abort
                 let l:pad -= s:SignWidth(l:nr)
             endif
             call setwinvar(l:nr, '&foldcolumn', &g:foldcolumn + l:pad)
-            if g:ActiveWindow_cursorline
+            if g:activewindow#cursorline
                 call setwinvar(l:nr, '&cursorline', 0)
             endif
         endif
@@ -79,5 +79,5 @@ function s:SignWidth(winnr) abort
 endfunction
 
 function s:Skip(winnr) abort
-    return bufname(winbufnr(a:winnr)) =~ join(g:ActiveWindow_skip, '\|')
+    return !empty(g:activewindow#skip) && bufname(winbufnr(a:winnr)) =~ join(g:activewindow#skip, '\|')
 endfunction
