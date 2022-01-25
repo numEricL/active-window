@@ -20,9 +20,10 @@ let g:activewindow#skip = ['^NERD_tree_*', 'foo']
 
 ## Defaults
 ```
-g:activewindow#enabled = 1
+g:activewindow#enable = 1
 g:activewindow#cursorline = 0
-nmap <leader>- <plug>(activewindow-Toggle)
+g:activewindow#use_default_maps = 1
+nmap <leader>a <plug>(activewindow-Toggle)
 ```
 
 ## Hints

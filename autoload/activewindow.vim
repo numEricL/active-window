@@ -1,6 +1,6 @@
 function activewindow#Toggle() abort
-    let g:activewindow#enabled = !g:activewindow#enabled
-    if g:activewindow#enabled
+    let g:activewindow#enable = !g:activewindow#enable
+    if g:activewindow#enable
         augroup ActiveWindow
             autocmd!
             autocmd WinEnter * call activewindow#set()
