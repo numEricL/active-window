@@ -52,10 +52,12 @@ function s:LineNumberWidth(winnr) abort
     if exists('*win_getid')
         let l:linenr=line('$', win_getid(a:winnr))
     else
-        let l:this_winnr = winnr()
+        let l:current_winnr = winnr()
+        let l:prev_winnr = winnr('#')
         execute 'noautocmd keepalt keepjumps '.a:winnr.'wincmd w'
         let l:linenr = line('$')
-        execute 'noautocmd keepalt keepjumps'.l:this_winnr.'wincmd w'
+        execute 'noautocmd keepalt keepjumps'.l:prev_winnr.'wincmd w'
+        execute 'noautocmd keepalt keepjumps'.l:current_winnr.'wincmd w'
     endif
     return max([&numberwidth, strlen(l:linenr)+1])
 endfunction
