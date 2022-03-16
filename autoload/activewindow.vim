@@ -49,14 +49,14 @@ function activewindow#restore() abort
 endfunction
 
 function s:LineNumberWidth(winnr) abort
-    try
+    if exists('*win_getid')
         let l:linenr=line('$', win_getid(a:winnr))
-    catch
+    else
         let l:this_winnr = winnr()
         execute 'noautocmd keepalt keepjumps '.a:winnr.'wincmd w'
         let l:linenr = line('$')
         execute 'noautocmd keepalt keepjumps'.l:this_winnr.'wincmd w'
-    endtry
+    endif
     return max([&numberwidth, strlen(l:linenr)+1])
 endfunction
 
