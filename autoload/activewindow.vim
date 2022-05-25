@@ -49,7 +49,7 @@ function activewindow#restore() abort
 endfunction
 
 function s:LineNumberWidth(winnr) abort
-    if exists('*win_getid')
+    if exists('*win_getid') && s:HasVersion(801,1987)
         let l:linenr=line('$', win_getid(a:winnr))
     else
         let l:current_winnr = winnr()
@@ -82,4 +82,18 @@ endfunction
 
 function s:Skip(winnr) abort
     return !empty(g:activewindow#skip) && bufname(winbufnr(a:winnr)) =~ join(g:activewindow#skip, '\|')
+endfunction
+
+function s:HasVersion(...) abort
+    if has('nvim')
+        return v:true
+    endif
+
+    if a:0 == 1
+        return v:version >= a:1
+    elseif a:0 == 2
+        return v:version > a:1 || v:version == a:1 && has('patch'.string(a:2))
+    else
+        throw 'HasVersion: wrong number of inputs'
+    endif
 endfunction
